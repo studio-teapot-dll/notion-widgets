@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* 노션과 어울리는 깔끔한 디자인 */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* 가로 중앙 정렬 */
+            align-items: center;     /* 세로 중앙 정렬 */
+            height: 100vh;
+            background-color: transparent; /* 배경 투명 (노션 다크모드 대응) */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #37352f; /* 노션 기본 글자색 (다크모드시 조정 필요) */
+        }
+        
+        /* 다크모드 대응 (미디어 쿼리) */
+        @media (prefers-color-scheme: dark) {
+            body { color: #ffffff; }
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .date {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .time {
+            font-size: 1rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="date" id="date"></div>
+        <div class="time" id="time"></div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            
+            // 날짜 포맷 (예: 12월 23일 화요일)
+            const dateOptions = { month: 'long', day: 'numeric', weekday: 'long' };
+            document.getElementById('date').innerText = now.toLocaleDateString('ko-KR', dateOptions);
+
+            // 시간 포맷 (예: 오후 1:30)
+            const timeOptions = { hour: 'numeric', minute: '2-digit' };
+            document.getElementById('time').innerText = now.toLocaleTimeString('ko-KR', timeOptions);
+        }
+
+        setInterval(updateTime, 1000); // 1초마다 갱신
+        updateTime(); // 최초 실행
+    </script>
+</body>
+</html>
